@@ -1,0 +1,23 @@
+{
+    "name": "boostsales/partial-shipment",
+    "description": "Partial shipment and order",
+    "version": "1.0.0",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "require": {
+        "magento/product-community-edition": "2.3.*"
+    },
+    "authors": [{
+        "name": "Newgen Payments pvt. ltd.",
+        "email": "info@newgenpayments.com",
+        "homepage": "https://www.newgenpayments.com/"
+    }],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Boostsales\\PartialShipment\\": ""
+        }
+    }
+}
