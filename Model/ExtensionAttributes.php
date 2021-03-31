@@ -11,10 +11,9 @@ class ExtensionAttributes implements ExtensionAttributesInterface
     {
         $attributes = $product->getExtensionAttributes();
         if($attributes->getStockItem()->getQty() < 1){
-            return "out";
-        }elseif($attributes->getStockItem()->getQty() > 1){
-            return "in";
+            return 'out';
+        } else{
+            return 'in';
         }
-
     }
 }
