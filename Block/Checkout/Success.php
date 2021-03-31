@@ -51,9 +51,13 @@ class Success extends \Magento\Checkout\Block\Onepage\Success
 
     public function getOrder($id) {
         $lastOId = $this->checkoutSession->getLastRealOrderId();
-        $BackorderId = array_diff($id, [$lastOId]);
-        $this->_order = $this->_orderDetail->loadByIncrementId($BackorderId);
-        return $this->_order;
+        if(is_array($id)){
+            $BackorderId = array_diff($id, [$lastOId]);
+            $this->_order = $this->_orderDetail->loadByIncrementId($BackorderId);
+            return $this->_order;
+        }else{
+            return false;
+        }
     }
 
     public function getItem($itemId) {
