@@ -145,20 +145,9 @@ class QuoteHandler implements QuoteHandlerInterface
         }
         $shippingTotals = $quote->getShippingAddress()->getShippingAmount();
 
-        static $process = 1;
-
-        if ($process > 1) {
-            
-            $quote->getShippingAddress()->setShippingAmount($total);
-            return $total;
-        }
-        $process ++;
-
-        return $shippingTotals;
-
         if ($shippingTotals > 0) {
             
-            $total = (float) ($shippingTotals / count($quotes));
+            $total = (float) $shippingTotals;
             $quote->getShippingAddress()->setShippingAmount($total);
         }
         return $total;
