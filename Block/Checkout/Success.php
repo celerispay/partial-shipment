@@ -42,7 +42,7 @@ class Success extends \Magento\Checkout\Block\Onepage\Success
     {
         $splitOrders = $this->checkoutSession->getOrderIds();
         $this->checkoutSession->unsOrderIds();
-
+        $this->checkoutSession->unsOrderPreference();
         if (empty($splitOrders) || count($splitOrders) <= 1) {
             return false;
         }
