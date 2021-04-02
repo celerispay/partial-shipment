@@ -77,41 +77,50 @@ class SplitQuote
 
         $orders = [];
         $orderIds = [];
-        foreach ($quotes as $items) {
+        foreach ($quotes as $key => $items) {
             $split = $this->quoteFactory->create();
     
             $this->quoteHandler->setCustomerData($currentQuote, $split);
             $this->toSaveQuote($split);
 
             
-            foreach ($items as $item) {
+                foreach ($items as $item) {
                 
-                $item->setId(null);
-                $split->addItem($item);
-            }
-            $this->quoteHandler->populateQuote($quotes, $split, $items, $addresses, $payment);
+                    $item->setId(null);
+                    $split->addItem($item);
+                }
+                $this->quoteHandler->populateQuote($quotes, $split, $items, $addresses, $payment);
+                
 
-            
-            $this->eventManager->dispatch(
-                'checkout_submit_before',
-                ['quote' => $split]
-            );
+                $this->eventManager->dispatch(
+                    'checkout_submit_before',
+                    ['quote' => $split]
+                );
 
-            $this->toSaveQuote($split);
-            $order = $subject->submit($split);
+                $this->toSaveQuote($split);
+                if($key == 1){
+                    $payOrder = $subject->submit($split);
+                    $orders[] = $payOrder;
+                    $orderIds[$payOrder->getId()] = $payOrder->getIncrementId();
+                    if (null == $payOrder) {
+                        throw new LocalizedException(__('Please try to place the order again.'));
+                    }
+                } else{
+                    $split->setPaymentMethod('checkmo');
+                    $split->getPayment()->importData(['method' => 'checkmo']);
+                    $order = $subject->submit($split);
 
-            $orders[] = $order;
-            $orderIds[$order->getId()] = $order->getIncrementId();
-
-            if (null == $order) {
-                throw new LocalizedException(__('Please try to place the order again.'));
-            }
+                    $orders[] = $order;
+                    $orderIds[$order->getId()] = $order->getIncrementId();
+                    
+                    if (null == $order) {
+                        throw new LocalizedException(__('Please try to place the order again.'));
+                    }
+                }
         }
         $currentQuote->setIsActive(false);
         $this->toSaveQuote($currentQuote);
-
-        $this->quoteHandler->defineSessions($split, $order, $orderIds);
-
+        $this->quoteHandler->defineSessions($split, $payOrder, $orderIds);
         $this->eventManager->dispatch(
             'checkout_submit_all_after',
             ['orders' => $orders, 'quote' => $currentQuote]
