@@ -17,7 +17,13 @@ class Index extends \Magento\Framework\App\Action\Action
 
 	public function execute()
 	{
-		$this->_checkoutSession->setOrderPreference('separate_order');
+		if($_GET){
+			if($_GET['order_type'] == 'complete'){
+				$this->_checkoutSession->setOrderPreference('complete_order');
+			}if($_GET['order_type'] == 'separate'){
+				$this->_checkoutSession->setOrderPreference('separate_order');
+			}
+		}
 		$url = rtrim($this->_url->getUrl('checkout/#shipping'),'/');
         $this->_redirect($url);
 	}
