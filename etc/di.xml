@@ -1,20 +1,6 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="Boostsales\PartialShipment\Api\QuoteHandlerInterface" type="Boostsales\PartialShipment\Model\QuoteHandler"/>
-    <preference for="Boostsales\PartialShipment\Api\ExtensionAttributesInterface" type="Boostsales\PartialShipment\Model\ExtensionAttributes"/>
-
-    <type name="Magento\Quote\Model\QuoteManagement">
-        <plugin name="magestat-splitorder-split-quote" type="Boostsales\PartialShipment\Plugin\SplitQuote" sortOrder="1"/>
-    </type>
-    <type name="Magento\Sales\Api\OrderRepositoryInterface">
-        <plugin name="save_order_tax" disabled="true"/>
-    </type>
-
-    <preference for="Magento\Checkout\Block\Onepage\Success" type="Boostsales\PartialShipment\Block\Checkout\Success"/>
-    
-    <type name="Boostsales\PartialShipment\Model\QuoteHandler">
-        <arguments>
-            <argument name="QuoteHandler" xsi:type="object">Magento\Checkout\Model\Session\Proxy</argument>
-        </arguments>
+    <type name="Magento\Quote\Model\ShippingMethodManagement">
+        <plugin name="shipping_method_management" type="Boostsales\PartialShipment\Plugin\Model\ShippingMethodManagement" disabled="false" />
     </type>
 </config>
