@@ -3,4 +3,5 @@
     <type name="Magento\Quote\Model\ShippingMethodManagement">
         <plugin name="shipping_method_management" type="Boostsales\PartialShipment\Plugin\Model\ShippingMethodManagement" disabled="false" />
     </type>
+    <preference for="Logxstar\Integration\Observer\SalesOrderPlaceAfterObserver" type="Boostsales\PartialShipment\Observer\Logxstar\SalesOrderPlaceAfterObserver"/>
 </config>
