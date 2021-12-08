@@ -25,6 +25,7 @@ class Index extends \Magento\Framework\App\Action\Action
 				$this->_checkoutSession->setOrderPreference('separate_order');
 			}
 		}
-		return;
+		$url = rtrim($this->_url->getUrl('checkout/#shipping'),'/');
+        $this->_redirect($url);
 	}
 }
