@@ -18,6 +18,6 @@ class CartPageCache extends \Magento\Framework\View\Element\Template {
 	}
 
     protected function clearOrderPreference(){
-        // $this->_checkoutSession->unsOrderPreference();
+        $this->_checkoutSession->unsOrderPreference();
     }
 }
