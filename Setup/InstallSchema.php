@@ -27,6 +27,16 @@ class InstallSchema implements InstallSchemaInterface
                 'default' => 0
             ]
         );
+        $installer->getConnection()->addColumn(
+            $installer->getTable('sales_order_grid'),
+            'is_partial_delivery',
+            [
+                'type' => 'boolean',
+                'nullable' => true,
+                'comment' => 'Partial delivery',
+                'default' => 0
+            ]
+        );
 
         $setup->endSetup();
     }

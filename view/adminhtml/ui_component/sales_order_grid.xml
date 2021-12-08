@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+   <columns name="sales_order_columns">
+       <column name="is_partial_delivery" sortOrder="300">
+           <settings>
+               <filter>select</filter>
+               <sortable>false</sortable>
+               <options class="Boostsales\PartialShipment\Model\Source\PartialOrderStatus"/>
+               <dataType>select</dataType>
+               <label translate="true">Partial Delivery</label>
+           </settings>
+       </column>
+   </columns>
+</listing>
