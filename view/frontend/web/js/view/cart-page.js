@@ -25,7 +25,7 @@ define(
             isVisible: ko.observable(true),
             isLogedIn: customer.isLoggedIn(),
             //step code will be used as step content id in the component template
-            stepCode: 'Shopping Cart',
+            stepCode: 'Cart',
             //step title value
             stepTitle: 'Shopping Cart',
 
