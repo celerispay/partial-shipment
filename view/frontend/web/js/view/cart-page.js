@@ -4,14 +4,16 @@ define(
         'uiComponent',
         'underscore',
         'Magento_Checkout/js/model/step-navigator',
-        'Magento_Customer/js/model/customer'
+        'Magento_Customer/js/model/customer',
+        'mage/translate',
     ],
     function(
         ko,
         Component,
         _,
         stepNavigator,
-        customer
+        customer,
+        $t
     ) {
         'use strict';
         return Component.extend({
@@ -23,7 +25,7 @@ define(
             isVisible: ko.observable(true),
             isLogedIn: customer.isLoggedIn(),
             //step code will be used as step content id in the component template
-            stepCode: 'Cart',
+            stepCode: 'Shopping Cart',
             //step title value
             stepTitle: 'Shopping Cart',
 
@@ -38,7 +40,7 @@ define(
                     this.stepCode,
                     //step alias
                     null,
-                    this.stepTitle,
+                    $t('Shopping Cart'),
                     //observable property with logic when display step or hide step
                     this.isVisible,
 
